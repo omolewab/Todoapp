@@ -1,0 +1,67 @@
+<br>
+<form>
+    <div style="margin:0 auto;width:60%;text-align:center">
+  <div class="form-row">
+
+    <div class="col-md-5">
+      <input type="text" name="category" id="category" [(ngModel)]="newCategory.category" placeholder="category" class="form-control">
+    </div>
+    <div class="col-md-2">
+      <button type="submit" class="btn btn-primary" (click)="create()" placeholder="categoryUrl">Add</button>
+    </div>
+  </div>
+    </div>
+</form>
+
+<div class="col-md-2">
+
+</div>
+<br>
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+
+      <div class="categories" *ngIf="categoriesList">
+        <table class="table">
+          <thead class="h">
+            <tr class="h">
+              <th class="h">Category</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr class="category" (dblclick)="editCategory(category)" *ngFor="let category of categoriesList">
+
+              <ng-container *ngIf="!editCategories.includes(category); else editCD">
+                <td>{{category.Category}}</td>
+              </ng-container>
+
+              <ng-template #editCD>
+                <td>{{category.date | date}}</td>
+                <td>
+                  <input type="text" name="category" id="category" (keypress)="submitCategory($event, category)" [(ngModel)]="category.category" placeholder="category"
+                    class="form-control">
+                </td>
+              </ng-template>
+
+              <td class="c">
+                <button class="btn btn-success" (click)="doneCategory(category)">
+                  <i class="fa fa-check"></i>
+                </button>
+                <button class="btn btn-primary" (click)="editCategory(category)">
+                  <i class="fa fa-pencil"></i>
+                </button>
+                <button class="btn btn-danger" (click)="deleteCategory(category)">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+    </div>
+   
+
+  </div>
